@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ctxConsumer } from '../../context';
+import { CtxConsumer } from '../../context';
 
 import CartItem from './CartItem';
 
@@ -10,7 +10,7 @@ export default function CartList() {
 			{/* row */}
 			<div className="row">
 				<div className="col">
-					<ctxConsumer>
+					<CtxConsumer>
 						{(ctx) => {
                             const { cart, increment, decrement, removeItem } = ctx;
                             
@@ -36,7 +36,7 @@ export default function CartList() {
 								</>
 							);
 						}}
-					</ctxConsumer>
+					</CtxConsumer>
 				</div>
 			</div>
 		</div>

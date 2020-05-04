@@ -182,12 +182,12 @@ class CtxProvider extends Component {
     };
     
 	// close side cart
-	closeSideCart = () => {
+	closeCart = () => {
 		this.setState({ cartOpen: false });
     };
     
 	// open side cart
-	openSideCart = () => {
+	openCart = () => {
 		this.setState({ cartOpen: true });
     };
     
