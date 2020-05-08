@@ -25,7 +25,14 @@ class CtxProvider extends Component {
 		links: linkData,
 		socialIcons: socialData,
 		
-		loading: true,
+        loading: true,
+        
+        filterSearchTerm: "",
+        filterPrice: 0,
+        filterCompany: "all",
+        filterShipping: false,
+        // minPrice: 0,
+        maxPrice: 0,
     };
     
 	componentDidMount() {
@@ -47,6 +54,9 @@ class CtxProvider extends Component {
         
 		//  featured products
         let featuredProducts = storeProducts.filter((item) => item.featured === true);
+
+        // calculate max price
+        let maxPrice = Math.max(...storeProducts.map(item => item.price));
             
         // set state
         this.setState({
@@ -56,6 +66,8 @@ class CtxProvider extends Component {
             cart: this.getStorageCart(),
             singleProduct: this.getStorageProduct(),
             loading: false,
+            filterPrice: maxPrice,
+            maxPrice: maxPrice
         }, () => {
             this.setTotals();
         });
@@ -252,7 +264,59 @@ class CtxProvider extends Component {
 				this.setTotals();
 				this.syncStorage();
 		});
-	};
+    };
+    
+    handleFilterChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.type !== 'checkbox' ? event.target.value : event.target.checked;
+
+		this.setState({
+			[name]: value,
+		},
+			this.filterData
+		);
+    }
+
+    filterData = () => {
+        const { 
+            filterSearchTerm,
+            filterPrice,
+            filterCompany,
+            filterShipping,
+            storeProducts
+        } = this.state;
+
+		let tempPrice = parseInt(filterPrice);
+        let tempProducts = [ ...storeProducts ];
+        
+		// filtering based on price
+        tempProducts = tempProducts.filter((item) => item.price <= tempPrice);
+        
+		// filtering based on company
+		if (filterCompany !== 'all') {
+			tempProducts = tempProducts.filter((item) => item.company === filterCompany);
+        }
+        
+        // filtering based on freeShipping
+		if (filterShipping) {
+			tempProducts = tempProducts.filter((item) => item.freeShipping === true);
+        }
+        
+        // filtering based on search text
+		if (filterSearchTerm.length > 0) {
+			tempProducts = tempProducts.filter((item) => {
+				let tempSearch = filterSearchTerm.toLowerCase();
+                let tempTitle = item.title.toLowerCase();
+                let tempDesc = item.description.toLowerCase();
+                
+                return tempTitle.includes(tempSearch) || tempDesc.includes(tempSearch);
+			});
+        }
+        
+		this.setState({
+			filteredProducts: tempProducts,
+		});
+    }
 
 	render() {
 		return (
@@ -265,13 +329,15 @@ class CtxProvider extends Component {
                     
 					toggleSidebar: this.toggleSidebar,
 					toggleSideCart: this.toggleSideCart,
-					closeSideCart: this.closeSideCart,
-                    openSideCart: this.openSideCart,
+					closeCart: this.closeCart,
+                    openCart: this.openCart,
                     
 					increment: this.increment,
 					decrement: this.decrement,
 					removeItem: this.removeItem,
-					clearCart: this.clearCart,
+                    clearCart: this.clearCart,
+                    
+                    handleFilterChange: this.handleFilterChange
 				}}
 			>
 				{this.props.children}
