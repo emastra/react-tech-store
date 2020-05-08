@@ -13,14 +13,14 @@ export default function Footer() {
 					<FooterWrapper>
 						<div className="container py-3">
 							<div className="row">
-								<div className="col-md-6">
-									<p className="text-capitalize">
-										copyright &copy; tech store {new Date().getFullYear()}. all rights reserved{' '}
+								<div className="col-md-12 d-flex justify-content-around">
+									<p className="text-capitalize" style={{"font-color":"#5fb7ea", "margin":"1rem"}}>
+										Prodly developed by <a href="https://github.com/emastra">Emiliano Mastragostino</a>
 									</p>
 								</div>
-								<div className="col-md-6 d-flex justify-content-around">
+                                <div className="col-md-12 d-flex justify-content-center" >
 									{socialIcons.map((icon) => (
-										<a href={icon.url} key={icon.id}>
+										<a href={icon.url} key={icon.id} style={{margin:"1rem"}}>
 											{icon.icon}
 										</a>
 									))}
