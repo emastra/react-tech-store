@@ -9,35 +9,34 @@ const Context = React.createContext();
 class CtxProvider extends Component {
 	state = {
         storeProducts: [],
-		filteredProducts: [],
-		featuredProducts: [],
+        filteredProducts: [],
+        featuredProducts: [],
         singleProduct: {},
 
         cart: [],
-		cartItems: 0,
-		cartSubTotal: 0,
-		cartTax: 0,
-		cartTotal: 0,
-        
-		sidebarOpen: false,
+        cartItems: 0,
+        cartSubTotal: 0,
+        cartTax: 0,
+        cartTotal: 0,
+
+        sidebarOpen: false,
         cartOpen: false,
-        
-		links: linkData,
-		socialIcons: socialData,
-		
+
+        links: linkData,
+        socialIcons: socialData,
+
         loading: true,
-        
+
         filterSearchTerm: "",
         filterPrice: 0,
         filterCompany: "all",
         filterShipping: false,
-        // minPrice: 0,
         maxPrice: 0,
     };
     
 	componentDidMount() {
-		// might take data from server
-		this.setProducts(items);
+        // might take data from server
+        this.setProducts(items);
     }
 
 	// set products
