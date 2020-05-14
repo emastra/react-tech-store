@@ -8,13 +8,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { CtxProvider } from './context';
 
 ReactDOM.render(
-	<CtxProvider>
-		<Router>
-			<App />
-		</Router>
-	</CtxProvider>,
+    <CtxProvider>
+        <Router>
+            <App />
+        </Router>
+    </CtxProvider>,
 
-	document.getElementById('root')
+    document.getElementById('root')
 );
 
 serviceWorker.unregister();
