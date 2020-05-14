@@ -16,10 +16,10 @@ export default function SingleProductPage() {
 
 					if (loading) {
 						return <h1>product loading....</h1>;
-                    }
-                    
-                    const { company, description, id, price, title, image } = singleProduct;
-                    
+					}
+
+					const { company, description, id, price, title, image } = singleProduct;
+
 					return (
 						<section className="py-5">
 							<div className="container">
