@@ -14,7 +14,7 @@ export default function Footer() {
                         <div className="container py-3">
                             <div className="row">
                                 <div className="col-md-12 d-flex justify-content-around">
-                                    <p className="text-capitalize" style={{ "font-color": "#5fb7ea", "margin": "1rem" }}>
+                                    <p className="text-capitalize" style={{ "fontColor": "#5fb7ea", "margin": "1rem" }}>
                                         Prodly developed by <a href="https://github.com/emastra">Emiliano Mastragostino</a>
                                     </p>
                                 </div>
